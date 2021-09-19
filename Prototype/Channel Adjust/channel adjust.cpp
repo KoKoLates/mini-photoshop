@@ -25,7 +25,7 @@ void MainWindow::connection()
     connect(ui->green, SIGNAL(valueChanged(int)), this, SLOT(greenSlider(int)));
     connect(ui->red, SIGNAL(valueChanged(int)), this, SLOT(redSlider(int)));
     connect(ui->contrast, SIGNAL(valueChanged(int)), this, SLOT(contrastSlider(int)));
-    connect(ui->brigthness, SIGNAL(valueChanged(int)), this, SLOT(brigthnessSlider(int)));
+    connect(ui->brightness, SIGNAL(valueChanged(int)), this, SLOT(brightnessSlider(int)));
 }
 
 void MainWindow::SliderInitialize()
@@ -43,8 +43,8 @@ void MainWindow::SliderInitialize()
     ui->contrast->setMaximum(100);
     ui->contrast->setMinimum(-70);
 
-    ui->brigthness->setMaximum(127);
-    ui->brigthness->setMinimum(-127);
+    ui->brightness->setMaximum(127);
+    ui->brightness->setMinimum(-127);
 }
 
 void MainWindow::fileOpen()
@@ -143,7 +143,7 @@ void MainWindow::contrastSlider(int value)
     imshow("Image", dst);
 }
 
-void MainWindow::brigthnessSlider(int value)
+void MainWindow::brightnessSlider(int value)
 {
     beta = value;
     Mat dst = Mat::zeros(image.size(), image.type());
