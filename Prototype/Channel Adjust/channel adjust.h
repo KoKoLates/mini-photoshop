@@ -37,7 +37,7 @@ public slots:
     void greenSlider(int);
     void redSlider(int);
     void contrastSlider(int);
-    void brigthnessSlider(int);
+    void brightnessSlider(int);
     
 };
 #endif // MAINWINDOW_H
