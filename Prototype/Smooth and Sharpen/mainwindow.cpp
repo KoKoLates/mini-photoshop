@@ -167,9 +167,3 @@ void MainWindow::newSharpen()
     connect(ui->generalSlider, SIGNAL(valueChanged(int)), sharpen, SLOT(valueChanged(int)));
     connect(ui->laplacianSlider, SIGNAL(valueChanged(int)), sharpen, SLOT(valueChanged(int)));
 }
-
-
-
-
-
-
