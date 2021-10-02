@@ -1,4 +1,6 @@
 # Photoshop-Demo
 Design a basic Photoshop demo programming with Qt IDE, OpenCV and some algorithms of images processing for exhibiting the reward in 2021 summer course.
 
-## Main Window's Frame
+## Main Window
+### Pages Switch
+### Qss
