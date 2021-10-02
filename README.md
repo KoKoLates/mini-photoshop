@@ -4,3 +4,18 @@ Design a basic Photoshop demo programming with Qt IDE, OpenCV and some algorithm
 ## Main Window
 ### Pages Switch
 ### Qss
+
+## Resize
+### Resize
+### Rotate
+### Crop
+
+## Image
+### Blur
+### cvtColor
+### Channel
+### Sharpen
+
+## Effect
+### Color Effects
+### Special Effects
