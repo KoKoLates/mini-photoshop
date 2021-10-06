@@ -24,6 +24,30 @@ void MainWindow::switchPages()
 }
 ```
 Connect all the action signals to the `switchPages()` slots function, and using `qobject_cast` to find the action of sender, then switch to corresponding pages.
+### Drag / Drop
+```cpp
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    if(true && image.empty())
+    {
+        event->acceptProposedAction(); // accept to drag in the image
+        ui->label->setStyleSheet("border: 5px dashed #242424");
+    }
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    QList<QUrl>urls = event->mimeData()->urls();
+    if(urls.empty()) return;
+    QString filePath = urls.first().toLocalFile();
+    if(!filePath.isEmpty())
+    {
+        image = imread(filePath.toStdString().c_str());
+        imshow("Image", image); //show on the Image window
+        emit ui->Crop->triggered(); // switch to the crop pages as deflaut
+    }
+}
+```
 ### Qss
 
 ## Resize
