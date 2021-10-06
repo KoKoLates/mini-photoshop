@@ -64,6 +64,7 @@ void Resize::valueChanged(int value)
 ```
 Cooperate with QSlider to display the effects of resizing in the  preview windows.
 ### [Rotate](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/rotate.cpp)
+```cpp
 void Rotate::rotate()
 {
     QPushButton *button = qobject_cast<QPushButton*>(sender());
@@ -87,7 +88,8 @@ void Rotate::rotate()
     }
     imshow("Preview", dst);
 }
-### Crop
+```
+### [Crop](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/crop.cpp)
 
 ## Image
 ### Blur
