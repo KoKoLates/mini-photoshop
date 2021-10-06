@@ -3,9 +3,6 @@ Design a basic Photoshop demo programming with Qt IDE, OpenCV and some algorithm
 
 ## Main Window
 ### Interface
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Image/Interface.png)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Image/Image.png)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Image/Preview.png)
 ### Pages Switch
 ### Qss
 
