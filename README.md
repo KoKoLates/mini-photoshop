@@ -3,7 +3,7 @@ Design a basic Photoshop demo programming with Qt IDE, OpenCV and some algorithm
 
 ## Main Window
 ### Interface
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/console.png)<br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/console.png)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/original.png)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/preview.png) <br/><br/>
 The console window is consist of workbench, image window and preview windows. The workbench can switch to different pages by triggering different action, and the effect of any function will dsiplay on the preview window as the preview for user to choose that using this method or not. By QDialogButton, ones could `cancel` the preview or `choose` this method and display the result on the image window and waiting for saving.
