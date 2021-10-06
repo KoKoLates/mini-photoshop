@@ -4,6 +4,25 @@ Design a basic Photoshop demo programming with Qt IDE, OpenCV and some algorithm
 ## Main Window
 ### Interface
 ### Pages Switch
+```cpp
+void MainWindow::switchPages()
+{
+    QAction *action = qobject_cast<QAction*>(sender());
+    if(action == ui->crop)
+    {
+        ...
+    }
+    eles if(action == ui->blur)
+    {
+        ...
+    }
+    else if(action == ui->sharpen)
+    {
+        ...
+    }
+    ...
+}
+```
 ### Qss
 
 ## Resize
