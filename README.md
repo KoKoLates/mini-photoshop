@@ -97,7 +97,7 @@ void Rotate::rotate()
 ### [Crop](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/crop.cpp)
 Using the `setMouseCallBack()` function in OpenCV and self-revise the `onMouse()` function to attain complete attributes. The Crop function contain mainly two ways:
 * **Rectangle Region** <br/>
-A basic crop function in image processing, and users can selected a rectangle region they want in original image.
+A basic crop function in image processing, and users can selected a rectangle region they want in original image. <br/><br/>
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/rectOriginal.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/rectCrop.PNG)
 
