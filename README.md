@@ -23,6 +23,7 @@ void MainWindow::switchPages()
     ...
 }
 ```
+Connect all the action signals to the `switchPages()` slots function, and using `qobject_cast` to find the action of sender, then switch to corresponding pages.
 ### Qss
 
 ## Resize
