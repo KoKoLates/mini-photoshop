@@ -53,6 +53,7 @@ void MainWindow::dropEvent(QDropEvent *event)
     }
 }
 ```
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/Drag.png)
 ### Qss
 
 ## Resize
