@@ -24,7 +24,7 @@ void MainWindow::switchPages()
 }
 ```
 Connect all the action signals to the `switchPages()` slots function, and using `qobject_cast` to find the action of sender, then switch to corresponding pages.
-### Drag / Drop
+### [Drag / Drop](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/event.h)
 ```cpp
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
@@ -51,8 +51,42 @@ void MainWindow::dropEvent(QDropEvent *event)
 ### Qss
 
 ## Resize
-### Resize
-### Rotate
+### [Resize](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/resize.cpp)
+```cpp
+void Resize::valueChanged(int value)
+{
+    float percentage = (value + 20.0) / 20.0;
+    int width = src.cols * percentage;
+    int height = src.rows * percentage;
+    cv::resize(src, temp, Size(width,height));
+    imshow("Preview", temp);
+}
+```
+Cooperate with QSlider to display the effects of resizing in the  preview windows.
+### [Rotate](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/rotate.cpp)
+void Rotate::rotate()
+{
+    QPushButton *button = qobject_cast<QPushButton*>(sender());
+    if(button == vertical) 
+    {
+        flip(dst, dst, 0); // for vertical rotate
+    }
+    else if(button == horizontal)
+    {
+        flip(dst, dst, 1); // for horizontal rotate
+    }
+    else if(button == counterclockwise)
+    {
+        transpose(dst, dst); // for counterclockwise rotate
+        flip(dst, dst, 0);
+    }
+    else
+    {
+        transpose(dst, dst); // for clockwise rotate
+        flip(dst, dst, 1);
+    }
+    imshow("Preview", dst);
+}
 ### Crop
 
 ## Image
