@@ -6,7 +6,7 @@ Design a basic Photoshop demo programming with Qt IDE, OpenCV and some algorithm
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/console.png)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/original.png)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/preview.png) <br/><br/>
-The console window is consist of workbench, image window and preview windows. The workbench can switch to different pages by triggering different action, and the effect of any function will dsiplay on the preview window as the preview for user to choose that using this method or not. By QDialogButton, ones could `cancel` the preview or `choose` this method and display the result on the image window and waiting for saving.
+The console window is consist of workbench, image window and preview windows. The workbench can switch to different pages by triggering different action, and the effect of any function will dsiplay on the preview window as the preview for user to choose that using this method or not. By QDialogButton, ones could `Cancel` the preview or `Done` this method and display the result on the image window and waiting for saving.
 
 ### Pages Switch
 ```cpp
@@ -30,6 +30,12 @@ void MainWindow::switchPages()
 ```
 Connect all the action signals to the `switchPages()` slots function, and using `qobject_cast` to find the action of sender, then switch to corresponding pages.
 ### [Drag / Drop](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/event.h)
+```cpp
+protected:
+    void dropEvent(QDropEvent*);
+    void dragEnterEvent(QDragEnterEvent*);
+```
+Add the declaration in the header file and include the corresponding header file first to call and revise such event function.
 ```cpp
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
@@ -95,11 +101,41 @@ void Rotate::rotate()
 }
 ```
 ### [Crop](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/crop.cpp)
-Using the `setMouseCallBack()` function in OpenCV and self-revise the `onMouse()` function to attain complete attributes. The Crop function contain mainly two ways:
+Using the `setMouseCallBack()` function in OpenCV and self-revise the `onMouse()` function to attain complete attributes. For declaring and using the `onMouse()` function that almostly dosen't use member function and variable in a class, ones have to declare the `onMouse()` function as static member function.
+```cpp
+static void onMouse(int event, int x, int y, int flag, void *param);
+```
+The Crop method using in this Photoshop demo prject contain mainly two ways:
 * **Rectangle Region** <br/>
 A basic crop function in image processing, and users can selected a rectangle region they want in original image. <br/><br/>
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/rectOriginal.PNG) 
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/rectCrop.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/rectCrop.PNG)<br/><br/>
+```cpp
+void Crop::onMouse(int event, int x, int y, int flags, void *param)
+{
+    Crop *self = (Crop*)param; // get the point from calling class
+    Mat tempImg = self->dst.clone();
+    if(event == EVENT_LBUTTONDOWN) // the condition as the mouse clicked, record the start point
+        self->s = Point2f(x,y);
+    else if(event == EVENT_MOUSEMOVE && (flags & EVENT_FLAG_LBUTTON)) 
+    {
+        cv::rectangle(tempImg, self->s, Point(x,y), Scalar(255,0,0), 5);
+        imshow("Preview", tempImg);
+    }
+    else if(event == EVENT_LBUTTONUP) // finish selecting 
+        self->d = Point2f(x,y);
+    else if(event == EVENT_RBUTTONDOWN) //clicked right button to preview the result
+    {
+        int width = abs(self->s.x - self->d.x);
+        int height = abs(self->s.y - self->d.y);
+        Rect roi(self->s, Size(width,height));
+        self->dst = tempImg(roi);
+        imshow("Preview", self->dst);
+    }
+}
+```
+By judging the event and flag ( draging or not), ones could select the region that want in the rectangle frame, and after right button clicked, user could preview the result in the preview windows. If the result is statisfying, just clicked "Done" to store as image, or just "Cancel" and reecreate another preview.
+
 
 ## Image
 ### Blur
