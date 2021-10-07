@@ -136,8 +136,34 @@ void Crop::onMouse(int event, int x, int y, int flags, void *param)
 ```
 By judging the event and flag ( draging or not), ones could select the region that want in the rectangle frame, and after right button clicked, user could preview the result in the preview windows. If the result is statisfying, just clicked "Done" to store as image, or just "Cancel" and reecreate another preview.
 * **Self Selected Region** <br/>
-For Some not perpendicular region that ones holp to modulate and project into rectangle shape.
+For Some not perpendicular region that ones holp to modulate and project into rectangle shape. <br/><br/>
 
+![image]
+![image] <br/><br/>
+```cpp
+void Crop::onMouse(int event, int x, int y, int, void *param)
+{
+    Crop *self = (Crop*)param;
+    Mat tempImg = self->dst.clone();
+    if(event == EVENT_LBUTTONDOWN)
+        self->point.append(Point(x,y)); //
+    if(event == EVENT_RBUTTONDOWN)
+    {
+        ... // find the src points, dst points and height/width ratio
+        Mat matrix;
+        matrix = getPerspectiveTransform(s, d);
+        cv::warpPerspective(tempImg , self->dst, matrix, Size(400,400*ratio));
+        self->point.clear();
+        imshow("Preview", self->dst);
+    }
+    else
+    {
+        ...//display the points and path that have been selected
+        imshow("Preview", tempImg);
+    }
+}
+```
+Users could selected the region they want, only that could be converted into rectangle. And just clicked the corner of the region, then click the right mouse button, we could use `getPerspective()` function in OpenCV to generate transform matrix, and then using `warpPerspective()` to transform the selected region into the rectangle shape then display on the preview windows. 
 
 ## Image
 ### Blur
