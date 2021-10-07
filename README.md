@@ -113,7 +113,7 @@ A basic crop function in image processing, and users can selected a rectangle re
 ```cpp
 void Crop::onMouse(int event, int x, int y, int flags, void *param)
 {
-    Crop *self = (Crop*)param; // get the point from calling class
+    Crop *self = (Crop*)param; // get the pointer from calling class
     Mat tempImg = self->dst.clone();
     if(event == EVENT_LBUTTONDOWN) // the condition as the mouse clicked, record the start point
         self->s = Point2f(x,y);
