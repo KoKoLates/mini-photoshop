@@ -135,6 +135,8 @@ void Crop::onMouse(int event, int x, int y, int flags, void *param)
 }
 ```
 By judging the event and flag ( draging or not), ones could select the region that want in the rectangle frame, and after right button clicked, user could preview the result in the preview windows. If the result is statisfying, just clicked "Done" to store as image, or just "Cancel" and reecreate another preview.
+* **Self Selected Region**
+For Some not perpendicular region that ones holp to modulate and project into rectangle shape.
 
 
 ## Image
