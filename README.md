@@ -147,7 +147,7 @@ void Crop::onMouse(int event, int x, int y, int, void *param)
     Mat tempImg = self->dst.clone();
     if(event == EVENT_LBUTTONDOWN)
         self->point.append(Point(x,y)); //
-    if(event == EVENT_RBUTTONDOWN)
+    else eif(event == EVENT_RBUTTONDOWN)
     {
         ... // find the src points, dst points and height/width ratio
         Mat matrix;
@@ -166,7 +166,8 @@ void Crop::onMouse(int event, int x, int y, int, void *param)
 Users could selected the region they want, only that could be converted into rectangle. And just clicked the corner of the region, then click the right mouse button, we could use `getPerspective()` function in OpenCV to generate transform matrix, and then using `warpPerspective()` to transform the selected region into the rectangle shape then display on the preview windows. 
 
 ## Image
-### Blur
+### [Blur](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/blur.cpp)
+* [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
 ### cvtColor
 ### Channel
 ### Sharpen
