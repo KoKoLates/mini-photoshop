@@ -138,8 +138,8 @@ By judging the event and flag ( draging or not), ones could select the region th
 * **Self Selected Region** <br/>
 For Some not perpendicular region that ones holp to modulate and project into rectangle shape. <br/><br/>
 
-![image]
-![image] <br/><br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/selfOriginal.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/selfCrop.PNG) <br/><br/>
 ```cpp
 void Crop::onMouse(int event, int x, int y, int, void *param)
 {
