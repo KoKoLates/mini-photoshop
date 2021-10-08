@@ -195,7 +195,7 @@ Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median
         dst = src.clone();
     }
 ```
-With the QSpinBox, ones could adjust the size of kernel in the same time.
+With the QSpinBox, ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
 * [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
 ### cvtColor
 ### Channel
