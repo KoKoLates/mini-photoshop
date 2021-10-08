@@ -167,12 +167,35 @@ Users could selected the region they want, only that could be converted into rec
 
 ## Image
 ### [Blur](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/blur.cpp)
-Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring.
+Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring. <br/><br/>
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/blurOriginal.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/box.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/gaussian.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG)
+```cpp
+    switch (type) {
+    case Blur::box:
+        cv::blur(src, dst, Size(kernel,kernel));
+        break;
+        
+    case Blur::gaussian:
+        GaussianBlur(src, dst, Size(kernel,kernel), 0, 0);
+        break;
+        
+    case Blur::median:
+        medianBlur(src, dst, kernel);
+        break;
+        
+    case Blur::bilateral:
+        bilateralFilter(src, dst, 5, kernel * 10, kernel * 10);
+        break;
+        
+    default:
+        dst = src.clone();
+    }
+```
+With the QSpinBox, ones could adjust the size of kernel in the same time.
 * [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
 ### cvtColor
 ### Channel
