@@ -167,6 +167,7 @@ Users could selected the region they want, only that could be converted into rec
 
 ## Image
 ### [Blur](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/blur.cpp)
+Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring.
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/blurOriginal.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/box.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/gaussian.PNG)
