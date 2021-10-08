@@ -167,6 +167,11 @@ Users could selected the region they want, only that could be converted into rec
 
 ## Image
 ### [Blur](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/blur.cpp)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/blurOriginal.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/box.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/gaussian.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG)
 * [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
 ### cvtColor
 ### Channel
