@@ -174,26 +174,26 @@ Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG)
 ```cpp
-    switch (type) {
-    case Blur::box:
-        cv::blur(src, dst, Size(kernel,kernel));
-        break;
+switch (type) {
+case Blur::box:
+    cv::blur(src, dst, Size(kernel,kernel));
+    break;
+   
+case Blur::gaussian:
+    GaussianBlur(src, dst, Size(kernel,kernel), 0, 0);
+    break;
         
-    case Blur::gaussian:
-        GaussianBlur(src, dst, Size(kernel,kernel), 0, 0);
-        break;
+case Blur::median:
+    medianBlur(src, dst, kernel);
+    break;
+      
+case Blur::bilateral:
+    bilateralFilter(src, dst, 5, kernel * 10, kernel * 10);
+    break;
         
-    case Blur::median:
-        medianBlur(src, dst, kernel);
-        break;
-        
-    case Blur::bilateral:
-        bilateralFilter(src, dst, 5, kernel * 10, kernel * 10);
-        break;
-        
-    default:
-        dst = src.clone();
-    }
+default:
+    dst = src.clone();
+}
 ```
 With the QSpinBox, ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
 * [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
@@ -203,19 +203,19 @@ void cvtColor(InpytArray src, OutputArray dst, int code, int dstCn = 0);
 ```
 ### [Channel](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/channel.cpp)
 ```cpp
-    for(int row = 0; row < rows; row++)
+for(int row = 0; row < rows; row++)
+{
+    for(int col = 0; col < cols; col++)
     {
-        for(int col = 0; col < cols; col++)
-        {
-           int b = src.at<Vec3b>(row, col)[0];
-           int g = src.at<Vec3b>(row, col)[1];
-           int r = src.at<Vec3b>(row, col)[2];
+       int b = src.at<Vec3b>(row, col)[0];
+       int g = src.at<Vec3b>(row, col)[1];
+       int r = src.at<Vec3b>(row, col)[2];
 
-           dst.at<Vec3b>(row, col)[0] = saturate_cast<uchar>(alpha * b + beta);
-           dst.at<Vec3b>(row, col)[1] = saturate_cast<uchar>(alpha * g + beta);
-           dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(alpha * r + beta);
-        }
-    }
+       dst.at<Vec3b>(row, col)[0] = saturate_cast<uchar>(alpha * b + beta);
+       dst.at<Vec3b>(row, col)[1] = saturate_cast<uchar>(alpha * g + beta);
+       dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(alpha * r + beta);
+     }
+}
 ```
 ### Sharpen
 
