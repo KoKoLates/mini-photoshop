@@ -217,8 +217,7 @@ for(int row = 0; row < rows; row++)
      }
 }
 ```
-### Sharpen
-
+### Sharpene
 ## Effect
 ### Color Effects
 ### Special Effects
