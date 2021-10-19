@@ -217,7 +217,7 @@ for(int row = 0; row < rows; row++)
      }
 }
 ```
-### Sharpene
+### [Sharpene](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/sharpen.cpp)
 The method of sharpen has mainly two ways : ones is using the laplacian operator, and the others way is by inverse weighted with Gaussianblur.
 * Laplacian
 ```cpp
