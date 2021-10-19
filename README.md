@@ -218,6 +218,20 @@ for(int row = 0; row < rows; row++)
 }
 ```
 ### Sharpene
+The method of sharpen has mainly two ways : ones is using the laplacian operator, and the others way is by inverse weighted with Gaussianblur.
+* Laplacian
+```cpp
+weight = -(value/50.0);
+cv::Laplacian(src, dst, CV_32F, 3);
+addWeighted(copy, 1 - weight, dst, weight, 0, dst);
+dst.convertTo(dst, CV_8UC2);
+```
+* Gaussain Blur
+```cpp
+weight = -(value/25.0);
+GaussianBlur(src, dst, Size(0,0), 10, 0);
+addWeighted(src, 1 - weight, dst, weight, 0, dst);
+```
 ## Effect
 ### Color Effects
 ### Special Effects
