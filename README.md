@@ -167,12 +167,7 @@ Users could selected the region they want, only that could be converted into rec
 
 ## Image
 ### [Blur](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/blur.cpp)
-Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring. <br/><br/>
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/blurOriginal.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/box.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/gaussian.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG)
+Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring.
 ```cpp
 switch (type) {
 case Blur::box:
@@ -195,6 +190,11 @@ default:
     dst = src.clone();
 }
 ```
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/blurOriginal.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/box.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/gaussian.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG)
 With the QSpinBox, ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
 * [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
 ### [cvtColor](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/cvtcolor.cpp)
