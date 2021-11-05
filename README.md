@@ -194,7 +194,7 @@ default:
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/box.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/gaussian.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG) <br/><Br/>
 With the QSpinBox, ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
 * [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
 ### [cvtColor](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/cvtcolor.cpp)
