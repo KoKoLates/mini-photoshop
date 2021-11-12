@@ -198,6 +198,7 @@ default:
 With the QSpinBox, ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
 * [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
 ### [cvtColor](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/cvtcolor.cpp)
+In the section, I just operating the `cvtColor()` function in openecv, to adjust the color space of cooresponding selections. And ones could find out the color of the image has changed as the color space is different. To avoid the leak of channel, I check that the number of the channel before converts that the cvtColor doesn't have to convert the gray picture to color picture.
 ```cpp
 void cvtColor(InpytArray src, OutputArray dst, int code, int dstCn = 0);
 ```
