@@ -1,8 +1,8 @@
-# Sharpening Images
+# Edge Detection
 
 By realizing the calculus of the derivatives in an image, ones could easily notice that in an edge, the pixel intensity changes in a notorious way. A good way to express changes is by using derivatives. A high change in gradient indicates a major change in the image. Assume we have a 1D image. An edge is shown by the jump in intensity in the plot, The edge jump can be seen more easily if we take the first derivative (actually, here appears as a maximum value). <br/><br/>
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/origins.PNG)
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/derivative.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/origins.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/derivative.PNG) <br/>
 
 So far, from the explanation above, we can deduce that a method to detect edges or sharpening the object borders in an image can be performed by locating pixel locations where the gradient is higher than its neighbors (or to generalize, higher than a threshold).
 
