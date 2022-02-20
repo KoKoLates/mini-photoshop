@@ -16,12 +16,12 @@ The Sobel Operator is a discrete differentiation operator. It computes an approx
 
 Assuming it is the grayscale value function of the two-dimensional image, the grayscale change gradient is a the vector of slope change (slope), then the gradient of the image is defined as : *G<sub>x</sub>* Gradient value in the horizontal direction and *G<sub>y</sub>* Gradient value in the vertical direction. <br/>
 
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/x%20gradient.PNG)
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/y%20gradient.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/x%20gradient.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/y%20gradient.PNG) <br/>
   
 At each point of the image we calculate an approximation of the gradient in that point by combining both results above.
   
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/sobel%20equation.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/sobel%20equation.PNG)
 ```cpp
 cv::Sobel(InputArray src, OutputArray dst, int ddeth, int dx, int dy, int ksize = 3, double scale = 1, double delta = 0, int borderType = BORDER_DEFAULT)
 ```
@@ -40,8 +40,8 @@ borderType | pixel extrapolation method.
 
 * **Prewitt's Operator** <br/>
 Prewitt operator is similar to the Sobel operator and is used for detecting vertical and horizontal edges in images. However, unlike the Sobel, Prewitt operator doesn't place any emphasis on the pixels that are closer to the center of the mask. <br/>
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/prewitt%20x.PNG)
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/prewitt%20y.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/prewitt%20x.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/prewitt%20y.PNG)
   
 ## Scharr Operator
 When the size of the kernel is `3`, the Sobel kernel shown above may produce noticeable inaccuracies (after all, Sobel is only an approximation of the derivative). OpenCV addresses this inaccuracy for kernels of size 3 by using the `Scharr()` function. The weight of adjacent pixels is larger, so the accuracy is higher than the standard Sobel function and it could calculate more detailing gradient changes.
@@ -64,19 +64,19 @@ delta      | optional delta value that is added to the results prior to storing 
 borderType | pixel extrapolation method.
 ```
   
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/scharr%20x.PNG)
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/scharr%20y.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/scharr%20x.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/scharr%20y.PNG)
 
 ## Laplacin Operator
 In the edge area, the pixel intensity shows a jump or a high variation. Getting the first derivative of the intensity, we observed that an edge is characterized by a maximum. And if getting in second derivative, it would observe that it's zero. So, we can also use this criterion to detect edges in an image. However, note that zeros will not only appear in edges, it can also appear in other meaningless locations; that is, the Laplacian operator is very sensitive to noise. To correct it, the image often Gaussian smoothed before apply Laplacian filter.
 
 (they can actually appear in other meaningless locations); this can be solved by applying filtering where needed. <br/>
 
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/second%20derivative.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/second%20derivative.PNG) <br/>
 
 From the explanation above, it could deduce that the second derivative cne use to detect edeges. And because the image is 2D, it would need to take the derivative in both dimensions; therefore, the Laplacian operator comes handys. <br/>
 
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/laplacian.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/laplacian.PNG)
 ```cpp
 cv::Laplacian(InputArray src, OutputArray dst, int ddepth, int ksize = 1, double scale = 1, double delta = 0, int borderType = BORDER_DEFAULT)
 ```
@@ -91,14 +91,14 @@ delta      | Optional delta value that is added to the results prior to storing 
 borderType | Pixel extrapolation method.
 ```
 When `ksize == 1`, the Laplacian is computed by filtering the image with the following 3×3 aperture : <br/>
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/laplacian%20ksize%201.PNG)
+![image](hhttps://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/laplacian%20ksize%201.PNG)
 
 ## Canny Operator
 The Canny algorithm aims to satisfy three main criteria : **Low error rate** meaning a good detection of only existent edges; **Good localization** means the distance between edge pixels detected and real edge pixels have to be minimized; **Minimal response** said that only one detector response per edge. <br/><br/>
 
 For Canny edges detector, the first step is to filter out any noise, the Gaussian filter is used for this purpose and the kernal of `size = 5` might be used for general. Then, find the intensity gradient of the image by computing Sobel or Prewitt operator. Get the gradient strength and direction, the direction is rounded to one of four possible angle, namely 0, 45, 90 or 135 : <br/>
 
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Sharpening%20Images/images/canny%20equation.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/canny%20equation.PNG) <br/>
 
 Next, ***Non-maximum*** suppression is applied. This removes pixels that are not considered to be part of an edge. Hence, only thin lines, candidate edges, will be remained. The final step of Canny edges detector is **Hysteresis**. Canny does that with two threshold : upper and lower : 
 1. If a pixel gradient is higher than the upper threshold, the pixel is accepted as an edge.
