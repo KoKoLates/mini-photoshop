@@ -91,7 +91,7 @@ delta      | Optional delta value that is added to the results prior to storing 
 borderType | Pixel extrapolation method.
 ```
 When `ksize == 1`, the Laplacian is computed by filtering the image with the following 3×3 aperture : <br/>
-![image](hhttps://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/laplacian%20ksize%201.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Sharpening/images/laplacian%20ksize%201.PNG)
 
 ## Canny Operator
 The Canny algorithm aims to satisfy three main criteria : **Low error rate** meaning a good detection of only existent edges; **Good localization** means the distance between edge pixels detected and real edge pixels have to be minimized; **Minimal response** said that only one detector response per edge. <br/><br/>
