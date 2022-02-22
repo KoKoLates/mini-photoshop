@@ -46,7 +46,7 @@ borderType | pixel extrapolation method.
 ```
 * Sigma : <br/>
 The most important parameter of the generation of the Gaussian template is the standard deviation `σ`, the standard deviation represents the degree of dispersion of the data. If `σ` is small, the center coefficient of the generated template is large, and the surrounding coefficients are small, so the smoothing effect on the image is not obvious; on the contrary, if `σ` is large, the generated template The coefficients of the template are not very different. They are more similar to the mean template, and the smoothing effect on the image is more obvious. <br/><br/>
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Smoothing%20Images/images/sigma.PNG)
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Smoothing/images/sigma.PNG)
 * [Gaussian Filter Algorithm](https://github.com/KoKoLates/OpenCV/blob/main/Smoothing%20Images/Gaussian%20Filter.cpp)
 
 
