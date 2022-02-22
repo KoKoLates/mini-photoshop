@@ -1,6 +1,6 @@
 # Smoothing Images
 Smoothing, also called blurring, is a simple and frequently used image processing operation. There are many reasons for smoothing a images, and the mostly and mainly one is smoothing in order to reduce noise. To perform a smoothing operation we will apply a filter to our image. The most common type of filters are linear, in which an output pixel's value is determined as a weighted sum of input pixel values : <br/><br/>
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Smoothing%20Images/images/filter%20equation.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Smoothing/images/filter%20equation.PNG) <br/>
 
 `h` is called the kernel, which is nothing more than the coefficients of the filter. It helps to visualize a filter as a window of coefficients sliding across the image.
 * Main Include
@@ -10,7 +10,7 @@ Smoothing, also called blurring, is a simple and frequently used image processin
 
 
 ## Normalized Box Filter
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Smoothing%20Images/images/Box%20Filter.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Smoothing/images/Box%20Filter.PNG) <br/>
 This filter is the simplest of all. Each output pixel is the mean of its kernel neighbors ( all of them contribute with equal weights ). The basic function `blur()` is based on the Normalized Box Filter : 
 ```cpp
 cv::blur( InputArray src, OutputArray dst, Size ksize, Point archor = Point(-1,-1), int borderType = BORDER_DFFAULT)
@@ -25,11 +25,11 @@ anchor     | anchor point; default value Point(-1,-1) means that the anchor is a
 borderType | border mode used to extrapolate pixels outside of the image.
 ```
 The main disadvantage of the the normalized box filter is that it blurs the image while reducing noise, especially at the edges and details. And once you larger the kernal size, the more blurring while the denoising ability is enhanced.
-* [Box Filter Algorithms](https://github.com/KoKoLates/OpenCV/blob/main/Smoothing%20Images/Box%20Filter.cpp)
+* [Box Filter Algorithms](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Smoothing/Box%20Filter.cpp)
 
 ## Gaussian Filter 
 Probably the most useful filter (although not the fastest). Gaussian filtering is done by convolving each point in the input array with a Gaussian kernel and then summing them all to produce the output array. <br/><br/>
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Smoothing%20Images/images/Gaussian%202D.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Smoothing/images/Gaussian%202D.PNG) <br/>
 where `μ` is the mean (the peak) and `σ2` represents the variance (per each of the variables x and y). You can notice that the pixel located in the middle would have the biggest weight. The weight of its neighbors decreases as the spatial distance between them and the center pixel increases.
 ```cpp
 cv::Gaussian(InputArray src, OutputArray dst, Size ksize, double sigmaX, double sigmaY = 0, int borderType = BORDER_DEFFAULT)
@@ -52,7 +52,7 @@ The most important parameter of the generation of the Gaussian template is the s
 
 ## Median Filter
 The median filter run through each element of the signal (the image) and replace each pixel with the median of its neighboring pixels (located in a square neighborhood around the evaluated pixel). Median filter is a non-linear image processing method, which can take into account the preservation of boundary information while denoising. <br/><br/>
-![image](https://github.com/KoKoLates/OpenCV/blob/main/Smoothing%20Images/images/Median%20equation.PNG) <br/>
+![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Algorithm/Smoothing/images/Median%20equation.PNG) <br/>
 ```cpp
 cv::medianBlur(InputArray src, OutputArray dst, int ksize)
 ```
