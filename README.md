@@ -234,7 +234,13 @@ GaussianBlur(src, dst, Size(0,0), 10, 0);
 addWeighted(src, 1 - weight, dst, weight, 0, dst);
 ```
 ## Effect
-### Color Effects
+### [Color Effects](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/color.cpp)
+In this part, I jsut try to adjust the weight and proportions of each channel to get a proper or fantastic effects. Ones could using different type of filter below and get some needed one. Besides, it's welcome for others to recommand others uesful color effect filter to extend this function.
+```cpp
+dst.at<Vec3b>(row, col)[0] = saturate_cast<uchar>(0.272*b + 0.534*g + 0.131*r);
+dst.at<Vec3b>(row, col)[1] = saturate_cast<uchar>(0.168*b + 0.686*g + 0.349*r);
+dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(0.189*b + 0.769*g + 0.393*r);
+```
 ![image](./Images/color_effect1.png)
 ![image](./Images/color_effect2.png)
 ![image](./Images/color_effect3.png)
