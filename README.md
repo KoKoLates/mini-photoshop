@@ -235,5 +235,11 @@ addWeighted(src, 1 - weight, dst, weight, 0, dst);
 ```
 ## Effect
 ### Color Effects
-![image](./Images/color_effect0.png)
+![image](./Images/color_effect1.png)
+![image](./Images/color_effect2.png)
+![image](./Images/color_effect3.png)
+![image](./Images/color_effect4.png)
+![image](./Images/color_effect5.png)
+![image](./Images/color_effect6.png)
+![image](./Images/color_effect7.png)
 ### Special Effects
