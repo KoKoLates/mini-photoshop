@@ -248,4 +248,9 @@ dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(0.189*b + 0.769*g + 0.393*r);
 ![image](./Images/color_effect5.png)
 ![image](./Images/color_effect6.png)
 ![image](./Images/color_effect7.png)
-### Special Effects
+### [Special Effects](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/special.cpp)
+![image](./Images/special_effect1.png)
+![image](./Images/special_effect2.png)
+![image](./Images/special_effect3.png)
+![image](./Images/special_effect4.png)
+![image](./Images/special_effect5.png)
