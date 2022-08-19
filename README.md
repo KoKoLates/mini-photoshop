@@ -1,12 +1,15 @@
 # Photoshop-Demo
-Design a basic Photoshop demo programming with Qt IDE, OpenCV and some algorithms of images processing for exhibiting the results of 2021 summer course.
+Design a basic Photoshop like demo programming with Qt IDE, OpenCV and some algorithms of images processing for exhibiting the results of 2021 summer course.
+
+[`Presentation Slide`](./Slides/Photoshop%20Demo.pdf)、
+[`Source Code`](./Photoshop/)
 
 ## Main Window
 ### Interface
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/console.png)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/original.png)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/preview.png) <br/><br/>
-The console window is consist of workbench, image window and preview windows. The workbench can switch to different pages by triggering different action, and the effect of any function will dsiplay on the preview window as the preview for user to choose that using this method or not. By QDialogButton, ones could `Cancel` the preview or `Done` this method and display the result on the image window and waiting for saving.
+![image](./Images/console.png)
+![image](./Images//original.png)
+![image](./Images//preview.png) <br/><br/>
+The console window is consist of workbench, original image window and preview windows. The workbench can switch to different pages by triggering different action, and the effect of any function will dsiplay on the preview window as the preview for user to choose that using this method or not. By QDialogButton, ones could `Cancel` the preview or `Done` this method, display the result on the window of current image and waiting for saving.
 
 ### Pages Switch
 ```cpp
@@ -28,8 +31,10 @@ void MainWindow::switchPages()
     ...
 }
 ```
-Connect all the action signals to the `switchPages()` slots function, and using `qobject_cast` to find the action of sender, then switch to corresponding pages.
-### [Drag / Drop](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/event.h)
+Connect all the action signals to the `switchPages()` slots function, and using `qobject_cast` to find the action of sender, then switch to corresponding pages. By that, ones could be transferred different functional interface like: `Crop`, `Resize`, `Rotate`, `Color tuner` and so on.
+### [Drag / Drop](./Photoshop/event.h)
+With the drag and drop event, user could `select/open` their original image by dragging the image from the dictionary of their computer. <br> 
+![image](./Images/Drag.png)
 ```cpp
 protected:
     void dropEvent(QDropEvent*);
@@ -59,10 +64,10 @@ void MainWindow::dropEvent(QDropEvent *event)
     }
 }
 ```
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/Drag.png)
 
-## Resize
-### [Resize](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/resize.cpp)
+## Geometry Adjustment
+### [Resize](./Photoshop/resize.cpp)
+Cooperate with `QSlider` to display the effects of resizing in the preview window in real time. Then user could modify their image into a proper size.
 ```cpp
 void Resize::valueChanged(int value)
 {
@@ -73,8 +78,8 @@ void Resize::valueChanged(int value)
     imshow("Preview", temp);
 }
 ```
-Cooperate with QSlider to display the effects of resizing in the  preview windows.
-### [Rotate](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/rotate.cpp)
+### [Rotate](./Photoshop/rotate.cpp)
+There are some type of Rotate that support in this demo. The basic type is like `vertical`, `horizontal` and the implement aslo show below.
 ```cpp
 void Rotate::rotate()
 {
@@ -100,16 +105,19 @@ void Rotate::rotate()
     imshow("Preview", dst);
 }
 ```
-### [Crop](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/crop.cpp)
+![image](./Images/rotate1.png)
+![image](./Images/rotate2.png)
+![image](./Images/rotate3.png)
+### [Crop](./Photoshop/crop.cpp)
 Using the `setMouseCallBack()` function in OpenCV and self-revise the `onMouse()` function to attain complete attributes. For declaring and using the `onMouse()` function that almostly dosen't use member function and variable in a class, ones have to declare the `onMouse()` function as static member function.
 ```cpp
 static void onMouse(int event, int x, int y, int flag, void *param);
 ```
 The Crop method using in this Photoshop demo prject contain mainly two ways:
 * **Rectangle Region** <br/>
-A basic crop function in image processing, and users can selected a rectangle region they want in original image. <br/><br/>
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/rectOriginal.PNG) 
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/rectCrop.PNG)<br/><br/>
+A basic crop function in image processing, and users can selected a `rectangle` region they want in original image. <br/><br/>
+![image](./Images/rectOriginal.PNG) 
+![image](./Images/rectCrop.PNG)<br/><br/>
 ```cpp
 void Crop::onMouse(int event, int x, int y, int flags, void *param)
 {
@@ -134,12 +142,12 @@ void Crop::onMouse(int event, int x, int y, int flags, void *param)
     }
 }
 ```
-By judging the event and flag ( draging or not), ones could select the region that want in the rectangle frame, and after right button clicked, user could preview the result in the preview windows. If the result is statisfying, just clicked "Done" to store as image, or just "Cancel" and reecreate another preview.
+By judging the event and flag (draging or not), ones could select the region that want in the `rectangle` frame, and after right button clicked, user could preview the result in the preview windows right away. If the result is statisfying, just clicked `Done` to store as a current image, or just `Cancel` and recreate another rectangle frame or exit the crop session.
 * **Self Selected Region** <br/>
-For Some not perpendicular region that ones holp to modulate and project into rectangle shape. <br/><br/>
+For Some `not rectangle like` region of the image part, that ones holp to modulate and project into rectangle shape. <br/><br/>
 
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/selfOriginal.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/selfCrop.PNG) <br/><br/>
+![image](./Images/selfOriginal.PNG)
+![image](./Images/selfCrop.PNG) <br/><br/>
 ```cpp
 void Crop::onMouse(int event, int x, int y, int, void *param)
 {
@@ -165,8 +173,8 @@ void Crop::onMouse(int event, int x, int y, int, void *param)
 ```
 Users could selected the region they want, only that could be converted into rectangle. And just clicked the corner of the region, then click the right mouse button, we could use `getPerspective()` function in OpenCV to generate transform matrix, and then using `warpPerspective()` to transform the selected region into the rectangle shape then display on the preview windows. 
 
-## Image
-### [Blur](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/blur.cpp)
+## Color Adjustments
+### [Blur](./Photoshop/blur.cpp)
 Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring.
 ```cpp
 switch (type) {
@@ -196,7 +204,7 @@ default:
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
 ![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG) <br/><Br/>
 With the QSpinBox, ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
-* [Bluring Algorithms](https://github.com/KoKoLates/OpenCV/tree/main/Smoothing%20Images)
+* [Bluring Algorithms](./Prototype/Alogrithms/)
 ### [cvtColor](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/cvtcolor.cpp)
 In the section, I just operating the `cvtColor()` function in openecv, to adjust the color space of cooresponding selections. And ones could find out the color of the image has changed as the color space is different. To avoid the leak of channel, I check that the number of the channel before converts that the cvtColor doesn't have to convert the gray picture to color picture.
 ```cpp
