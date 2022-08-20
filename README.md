@@ -65,7 +65,7 @@ void MainWindow::dropEvent(QDropEvent *event)
 }
 ```
 
-## Geometry Adjustment
+## Geometry Adjustments
 ### [Resize](./Photoshop/resize.cpp)
 Cooperate with `QSlider` to display the effects of resizing in the preview window in real time. Then user could modify their image into a proper size.
 ```cpp
@@ -171,7 +171,12 @@ void Crop::onMouse(int event, int x, int y, int, void *param)
     }
 }
 ```
-Users could selected the region they want, only that could be converted into rectangle. And just clicked the corner of the region, then click the right mouse button, we could use `getPerspective()` function in OpenCV to generate transform matrix, and then using `warpPerspective()` to transform the selected region into the rectangle shape then display on the preview windows. 
+Users could selected the region they want, only that could be converted into rectangle. And just clicked the corner of the region, then click the right mouse button, we could use `getPerspective()` function in OpenCV to generate transform matrix, and then using `warpPerspective()` to transform the selected region into the rectangle shape then display on the preview windows.
+
+**Demo video** <br>
+<video width="320" height="240" controls>
+    <source src="./Images/audio/crop.mp4" type="video/mp4">
+</video>
 
 ## Color Adjustments
 ### [Blur](./Photoshop/blur.cpp)
@@ -198,19 +203,37 @@ default:
     dst = src.clone();
 }
 ```
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/blurOriginal.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/box.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/gaussian.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/median.PNG)
-![image](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Images/bilateral.PNG) <br/><Br/>
-With the QSpinBox, ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
+![image](./Images/blurOriginal.PNG)
+![image](./Images/box.PNG)
+![image](./Images/gaussian.PNG)
+![image](./Images/median.PNG)
+![image](./Images/bilateral.PNG) <br/><Br/>
+With the `QSpinBox` , ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
 * [Bluring Algorithms](./Prototype/Alogrithms/)
-### [cvtColor](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/cvtcolor.cpp)
+### [Sharpene](./Photoshop/sharpen.cpp)
+The method of sharpen has mainly two ways : ones is using the `laplacian` operator, and the others way is by inverse weighted with `Gaussian blur`.
+* Laplacian
+```cpp
+weight = -(value/50.0);
+cv::Laplacian(src, dst, CV_32F, 3);
+addWeighted(copy, 1 - weight, dst, weight, 0, dst);
+dst.convertTo(dst, CV_8UC2);
+```
+* Gaussain Blur
+```cpp
+weight = -(value/25.0);
+GaussianBlur(src, dst, Size(0,0), 10, 0);
+addWeighted(src, 1 - weight, dst, weight, 0, dst);
+```
+### [cvtColor](./Photoshop/cvtcolor.cpp)
 In the section, I just operating the `cvtColor()` function in openecv, to adjust the color space of cooresponding selections. And ones could find out the color of the image has changed as the color space is different. To avoid the leak of channel, I check that the number of the channel before converts that the cvtColor doesn't have to convert the gray picture to color picture.
 ```cpp
 void cvtColor(InpytArray src, OutputArray dst, int code, int dstCn = 0);
 ```
-### [Channel](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/channel.cpp)
+### [Channel](./Photoshop/channel.cpp)
+In the channel session, users could adjust the pixels values of RGB of the orignal image through the `QSlider`. The slider is set to the average value (as the raw image) in the beginning. And by the linear transformation, `Alpha` for adjust the contrast of the image, `Beta` for adjusting the brightening of the image.
+
+
 ```cpp
 for(int row = 0; row < rows; row++)
 {
@@ -226,24 +249,10 @@ for(int row = 0; row < rows; row++)
      }
 }
 ```
-### [Sharpene](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/sharpen.cpp)
-The method of sharpen has mainly two ways : ones is using the laplacian operator, and the others way is by inverse weighted with Gaussianblur.
-* Laplacian
-```cpp
-weight = -(value/50.0);
-cv::Laplacian(src, dst, CV_32F, 3);
-addWeighted(copy, 1 - weight, dst, weight, 0, dst);
-dst.convertTo(dst, CV_8UC2);
-```
-* Gaussain Blur
-```cpp
-weight = -(value/25.0);
-GaussianBlur(src, dst, Size(0,0), 10, 0);
-addWeighted(src, 1 - weight, dst, weight, 0, dst);
-```
-## Effect
-### [Color Effects](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/color.cpp)
-In this part, I jsut try to adjust the weight and proportions of each channel to get a proper or fantastic effects. Ones could using different type of filter below and get some needed one. Besides, it's welcome for others to recommand others uesful color effect filter to extend this function.
+
+## Image Effect
+### [Color Effects](./Photoshop/color.cpp)
+In this part, I jsut try to adjust the weight and proportions of each channel to get a proper or fantastic `effects`. Ones could using different type of filter below and get some needed one. Besides, it's welcome for others to recommand others uesful color effect filter to extend this function.
 ```cpp
 dst.at<Vec3b>(row, col)[0] = saturate_cast<uchar>(0.272*b + 0.534*g + 0.131*r);
 dst.at<Vec3b>(row, col)[1] = saturate_cast<uchar>(0.168*b + 0.686*g + 0.349*r);
@@ -256,7 +265,8 @@ dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(0.189*b + 0.769*g + 0.393*r);
 ![image](./Images/color_effect5.png)
 ![image](./Images/color_effect6.png)
 ![image](./Images/color_effect7.png)
-### [Special Effects](https://github.com/KoKoLates/Photoshop-Demo/blob/main/Photoshop/special.cpp)
+### [Special Effects](./Photoshop/special.cpp)
+
 ![image](./Images/special_effect1.png)
 ![image](./Images/special_effect2.png)
 ![image](./Images/special_effect3.png)
