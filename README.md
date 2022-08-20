@@ -266,20 +266,20 @@ dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(0.189*b + 0.769*g + 0.393*r);
 By modifying each pixels values, user could got different `texture` or `effects` through this function. General method is add a color or effects mask above the image or adjust the valus like color effects.
 ```cpp
 Mat maskImg(src.size(), CV_64F);
-        Point firstP = Point(maskImg.size().width/2, maskImg.size().height/2);
-        double radius = 1.0, power = 0.8;
-        double maxImgRadius = radius *getDistanceFromCorner(maskImg.size(), firstP);
-        maskImg.setTo(Scalar(1));
-        for(int i = 0; i < maskImg.rows; i++)
-        {
-            for(int j = 0; j < maskImg.cols; j++)
-            {
-                double temp = sqrt(pow((double)(firstP.x - Point(j, i).x), 2) + pow((double)(firstP.y - Point(j, i).y), 2))/maxImgRadius;
-                temp *= power;
-                double tempS = pow(cos(temp),4);
-                maskImg.at<double>(i, j) = tempS;
-            }
-        }
+Point firstP = Point(maskImg.size().width/2, maskImg.size().height/2);
+double radius = 1.0, power = 0.8;
+double maxImgRadius = radius *getDistanceFromCorner(maskImg.size(), firstP);
+maskImg.setTo(Scalar(1));
+for(int i = 0; i < maskImg.rows; i++)
+{
+    for(int j = 0; j < maskImg.cols; j++)
+    {
+        double temp = sqrt(pow((double)(firstP.x - Point(j, i).x), 2) + pow((double)(firstP.y - Point(j, i).y), 2))/maxImgRadius;
+        temp *= power;
+        double tempS = pow(cos(temp),4);
+        maskImg.at<double>(i, j) = tempS;
+    }
+}
 ```
 ![image](./Images/special_effect1.png)
 ![image](./Images/special_effect2.png)
