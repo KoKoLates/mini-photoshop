@@ -2,7 +2,8 @@
 Design a basic Photoshop like demo programming with Qt IDE, OpenCV and some algorithms of images processing for exhibiting the results of 2021 summer course.
 
 [`Presentation Slide`](./Slides/Photoshop%20Demo.pdf)、
-[`Source Code`](./Photoshop/)
+[`Source Code`](./Photoshop/)、
+[`Demo video`](/Images/audio/)
 
 ## Main Window
 ### Interface
@@ -173,11 +174,6 @@ void Crop::onMouse(int event, int x, int y, int, void *param)
 ```
 Users could selected the region they want, only that could be converted into rectangle. And just clicked the corner of the region, then click the right mouse button, we could use `getPerspective()` function in OpenCV to generate transform matrix, and then using `warpPerspective()` to transform the selected region into the rectangle shape then display on the preview windows.
 
-**Demo video** <br>
-<video width="320" height="240" controls>
-    <source src="./Images/audio/crop.mp4" type="video/mp4">
-</video>
-
 ## Color Adjustments
 ### [Blur](./Photoshop/blur.cpp)
 Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring.
@@ -265,8 +261,26 @@ dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(0.189*b + 0.769*g + 0.393*r);
 ![image](./Images/color_effect5.png)
 ![image](./Images/color_effect6.png)
 ![image](./Images/color_effect7.png)
-### [Special Effects](./Photoshop/special.cpp)
 
+### [Special Effects](./Photoshop/special.cpp)
+By modifying each pixels values, user could got different `texture` or `effects` through this function. General method is add a color or effects mask above the image or adjust the valus like color effects.
+```cpp
+Mat maskImg(src.size(), CV_64F);
+        Point firstP = Point(maskImg.size().width/2, maskImg.size().height/2);
+        double radius = 1.0, power = 0.8;
+        double maxImgRadius = radius *getDistanceFromCorner(maskImg.size(), firstP);
+        maskImg.setTo(Scalar(1));
+        for(int i = 0; i < maskImg.rows; i++)
+        {
+            for(int j = 0; j < maskImg.cols; j++)
+            {
+                double temp = sqrt(pow((double)(firstP.x - Point(j, i).x), 2) + pow((double)(firstP.y - Point(j, i).y), 2))/maxImgRadius;
+                temp *= power;
+                double tempS = pow(cos(temp),4);
+                maskImg.at<double>(i, j) = tempS;
+            }
+        }
+```
 ![image](./Images/special_effect1.png)
 ![image](./Images/special_effect2.png)
 ![image](./Images/special_effect3.png)
