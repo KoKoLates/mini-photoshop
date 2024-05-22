@@ -1,15 +1,15 @@
 # Photoshop-Demo
-Design a basic Photoshop like demo programming with Qt IDE, OpenCV and some algorithms of images processing for exhibiting the results of 2021 summer course.
+Design a basic photoshop-like software developed with qt creator, opencv and algorithms of images processing as the final project of 2021 summer lectures.
 
-[`Presentation Slide`](./Slides/Photoshop%20Demo.pdf)、
-[`Source Code`](./Photoshop/)、
-[`Demo video`](/Images/audio/)
+[`presentation`](./asset/photoshop_demo.pdf)、
+[`source code`](./src/)、
+[`demo video`](./asset/audio/)
 
 ## Main Window
 ### Interface
-![image](./Images/console.png)
-![image](./Images//original.png)
-![image](./Images//preview.png) <br/><br/>
+![image](./asset/image/console.png)
+![image](./asset/image/original.png)
+![image](./asset/image/preview.png) <br/><br/>
 The console window is consist of workbench, original image window and preview windows. The workbench can switch to different pages by triggering different action, and the effect of any function will dsiplay on the preview window as the preview for user to choose that using this method or not. By QDialogButton, ones could `Cancel` the preview or `Done` this method, display the result on the window of current image and waiting for saving.
 
 ### Pages Switch
@@ -33,9 +33,10 @@ void MainWindow::switchPages()
 }
 ```
 Connect all the action signals to the `switchPages()` slots function, and using `qobject_cast` to find the action of sender, then switch to corresponding pages. By that, ones could be transferred different functional interface like: `Crop`, `Resize`, `Rotate`, `Color tuner` and so on.
-### [Drag / Drop](./Photoshop/event.h)
+
+### [Import Image]
 With the drag and drop event, user could `select/open` their original image by dragging the image from the dictionary of their computer. <br> 
-![image](./Images/Drag.png)
+![image](./asset/image/Drag.png)
 ```cpp
 protected:
     void dropEvent(QDropEvent*);
@@ -67,7 +68,8 @@ void MainWindow::dropEvent(QDropEvent *event)
 ```
 
 ## Geometry Adjustments
-### [Resize](./Photoshop/resize.cpp)
+
+### [Image Resize](./src/resize.cpp)
 Cooperate with `QSlider` to display the effects of resizing in the preview window in real time. Then user could modify their image into a proper size.
 ```cpp
 void Resize::valueChanged(int value)
@@ -79,7 +81,7 @@ void Resize::valueChanged(int value)
     imshow("Preview", temp);
 }
 ```
-### [Rotate](./Photoshop/rotate.cpp)
+### [Image Rotate](./src/rotate.cpp)
 There are some type of Rotate that support in this demo. The basic type is like `vertical`, `horizontal` and the implement aslo show below.
 ```cpp
 void Rotate::rotate()
@@ -106,10 +108,10 @@ void Rotate::rotate()
     imshow("Preview", dst);
 }
 ```
-![image](./Images/rotate1.png)
-![image](./Images/rotate2.png)
-![image](./Images/rotate3.png)
-### [Crop](./Photoshop/crop.cpp)
+![image](./asset/image/rotate1.png)
+![image](./asset/image/rotate2.png)
+![image](./asset/image/rotate3.png)
+### [Image Crop](./src/crop.cpp)
 Using the `setMouseCallBack()` function in OpenCV and self-revise the `onMouse()` function to attain complete attributes. For declaring and using the `onMouse()` function that almostly dosen't use member function and variable in a class, ones have to declare the `onMouse()` function as static member function.
 ```cpp
 static void onMouse(int event, int x, int y, int flag, void *param);
@@ -117,8 +119,8 @@ static void onMouse(int event, int x, int y, int flag, void *param);
 The Crop method using in this Photoshop demo prject contain mainly two ways:
 * **Rectangle Region** <br/>
 A basic crop function in image processing, and users can selected a `rectangle` region they want in original image. <br/><br/>
-![image](./Images/rectOriginal.PNG) 
-![image](./Images/rectCrop.PNG)<br/><br/>
+![image](./asset/image/rectOriginal.PNG) 
+![image](./asset/image/rectCrop.PNG)<br/><br/>
 ```cpp
 void Crop::onMouse(int event, int x, int y, int flags, void *param)
 {
@@ -147,8 +149,8 @@ By judging the event and flag (draging or not), ones could select the region tha
 * **Self Selected Region** <br/>
 For Some `not rectangle like` region of the image part, that ones holp to modulate and project into rectangle shape. <br/><br/>
 
-![image](./Images/selfOriginal.PNG)
-![image](./Images/selfCrop.PNG) <br/><br/>
+![image](./asset/image/selfOriginal.PNG)
+![image](./asset/image/selfCrop.PNG) <br/><br/>
 ```cpp
 void Crop::onMouse(int event, int x, int y, int, void *param)
 {
@@ -175,7 +177,7 @@ void Crop::onMouse(int event, int x, int y, int, void *param)
 Users could selected the region they want, only that could be converted into rectangle. And just clicked the corner of the region, then click the right mouse button, we could use `getPerspective()` function in OpenCV to generate transform matrix, and then using `warpPerspective()` to transform the selected region into the rectangle shape then display on the preview windows.
 
 ## Color Adjustments
-### [Blur](./Photoshop/blur.cpp)
+### [Blurring](./src/blur.cpp)
 Using the vary function in the OpenCV like : `blur()`, `gaussianBlur()`, `median()` and `bilateral()`, users could attain different type of bluring and effects. Simply, median blur has the largest degree in bluring, that making the image more like comic and a little be ridiculous. The bilateral filter is a special one, that it could blur the image, but at the same time preserve the edges of the image content. From the image of bilateral bluring, you can see that the image is face is clear, but the hair region start bluring.
 ```cpp
 switch (type) {
@@ -199,14 +201,14 @@ default:
     dst = src.clone();
 }
 ```
-![image](./Images/blurOriginal.PNG)
-![image](./Images/box.PNG)
-![image](./Images/gaussian.PNG)
-![image](./Images/median.PNG)
-![image](./Images/bilateral.PNG) <br/><Br/>
+![image](./asset/image/blurOriginal.PNG)
+![image](./asset/image/box.PNG)
+![image](./asset/image/gaussian.PNG)
+![image](./asset/image/median.PNG)
+![image](./asset/image/bilateral.PNG) <br/><Br/>
 With the `QSpinBox` , ones could adjust the size of kernel in the same time. Below are some algorithms and basic concept, intro of each image blurring. Clicked the connection and turn to another blank pages.
-* [Bluring Algorithms](./Prototype/Alogrithms/)
-### [Sharpene](./Photoshop/sharpen.cpp)
+* [Bluring Algorithms](./dev/alogrithms/)
+### [Sharpen](./src/sharpen.cpp)
 The method of sharpen has mainly two ways : ones is using the `laplacian` operator, and the others way is by inverse weighted with `Gaussian blur`.
 * Laplacian
 ```cpp
@@ -221,12 +223,12 @@ weight = -(value/25.0);
 GaussianBlur(src, dst, Size(0,0), 10, 0);
 addWeighted(src, 1 - weight, dst, weight, 0, dst);
 ```
-### [cvtColor](./Photoshop/cvtcolor.cpp)
+### [Color Space Transform](./src/cvtcolor.cpp)
 In the section, I just operating the `cvtColor()` function in openecv, to adjust the color space of cooresponding selections. And ones could find out the color of the image has changed as the color space is different. To avoid the leak of channel, I check that the number of the channel before converts that the cvtColor doesn't have to convert the gray picture to color picture.
 ```cpp
 void cvtColor(InpytArray src, OutputArray dst, int code, int dstCn = 0);
 ```
-### [Channel](./Photoshop/channel.cpp)
+### [Color Channel](./src/channel.cpp)
 In the channel session, users could adjust the pixels values of RGB of the orignal image through the `QSlider`. The slider is set to the average value (as the raw image) in the beginning. And by the linear transformation, `Alpha` for adjust the contrast of the image, `Beta` for adjusting the brightening of the image.
 
 
@@ -247,22 +249,22 @@ for(int row = 0; row < rows; row++)
 ```
 
 ## Image Effect
-### [Color Effects](./Photoshop/color.cpp)
+### [Color Effects](./asset/image/color.cpp)
 In this part, I jsut try to adjust the weight and proportions of each channel to get a proper or fantastic `effects`. Ones could using different type of filter below and get some needed one. Besides, it's welcome for others to recommand others uesful color effect filter to extend this function.
 ```cpp
 dst.at<Vec3b>(row, col)[0] = saturate_cast<uchar>(0.272*b + 0.534*g + 0.131*r);
 dst.at<Vec3b>(row, col)[1] = saturate_cast<uchar>(0.168*b + 0.686*g + 0.349*r);
 dst.at<Vec3b>(row, col)[2] = saturate_cast<uchar>(0.189*b + 0.769*g + 0.393*r);
 ```
-![image](./Images/color_effect1.png)
-![image](./Images/color_effect2.png)
-![image](./Images/color_effect3.png)
-![image](./Images/color_effect4.png)
-![image](./Images/color_effect5.png)
-![image](./Images/color_effect6.png)
-![image](./Images/color_effect7.png)
+![image](./asset/image/color_effect1.png)
+![image](./asset/image/color_effect2.png)
+![image](./asset/image/color_effect3.png)
+![image](./asset/image/color_effect4.png)
+![image](./asset/image/color_effect5.png)
+![image](./asset/image/color_effect6.png)
+![image](./asset/image/color_effect7.png)
 
-### [Special Effects](./Photoshop/special.cpp)
+### [Special Effects](./src/special.cpp)
 By modifying each pixels values, user could got different `texture` or `effects` through this function. General method is add a color or effects mask above the image or adjust the valus like color effects.
 ```cpp
 Mat maskImg(src.size(), CV_64F);
@@ -274,15 +276,16 @@ for(int i = 0; i < maskImg.rows; i++)
 {
     for(int j = 0; j < maskImg.cols; j++)
     {
-        double temp = sqrt(pow((double)(firstP.x - Point(j, i).x), 2) + pow((double)(firstP.y - Point(j, i).y), 2))/maxImgRadius;
+        double temp = sqrt(pow((double)(firstP.x - Point(j, i).x), 2) + \
+            pow((double)(firstP.y - Point(j, i).y), 2)) / maxImgRadius;
         temp *= power;
         double tempS = pow(cos(temp),4);
         maskImg.at<double>(i, j) = tempS;
     }
 }
 ```
-![image](./Images/special_effect1.png)
-![image](./Images/special_effect2.png)
-![image](./Images/special_effect3.png)
-![image](./Images/special_effect4.png)
-![image](./Images/special_effect5.png)
+![image](./asset/image/special_effect1.png)
+![image](./asset/image/special_effect2.png)
+![image](./asset/image/special_effect3.png)
+![image](./asset/image/special_effect4.png)
+![image](./asset/image/special_effect5.png)
